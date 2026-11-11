@@ -123,9 +123,10 @@ pip install lunar-python x-iztro
 
 ```
 yi/
-├── install.ps1 / install.sh   # 安装（软链 or 复制）
-├── verify.py                  # 自检
-├── SHA256SUMS                 # 完整性校验
+├── install.ps1 / install.sh   # 安装（软链 or 复制；--only / --check）
+├── verify.py                  # 自检（结构/编译/引擎/校验和）
+├── release.py                 # 一键发布：归一 LF → 重算校验和 → 打包 → 解包自检
+├── SHA256SUMS                 # 完整性校验（31 条）
 ├── README.md  LICENSE  NOTICE  CHANGELOG.md
 └── skills/
     ├── fortune-hub/           # 路由（无脚本）
@@ -139,6 +140,6 @@ yi/
 
 ## 版本与许可
 
-v1.0.1 · MIT（代码与文档）· 传统文本部分见 `NOTICE`。
+v1.0.2 · MIT（代码与文档）· 传统文本部分见 `NOTICE`。
 
 致谢：`lunar-python`、`x-iztro` 两个上游库；《周易》《梅花易数》《八宅明镜》一系传统文本为公有领域。
