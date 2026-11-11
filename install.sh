@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# fortune-suite installer for macOS / Linux
+# yi installer for macOS / Linux
 #   ./install.sh                # symlink skills into ${DSH_HOME:-$HOME/.dsh}/skills
 #   ./install.sh --copy         # copy instead of symlink
 #   ./install.sh --dest <path>  # explicit target skills root

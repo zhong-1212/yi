@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.0.1 — 2026-11-11
+
+### 变更
+- 项目改名：`yi`（中文名「易」）。仓库 `zhong-1212/fortune-suite` → `zhong-1212/yi`，发布物 `yi-1.0.1.zip`。
+- 修正安装说明：zip 内**没有**顶层目录，原 `unzip ... && cd fortune-suite` 会失败；改为 `unzip ... -d yi && cd yi`（Windows 用 `Expand-Archive -DestinationPath yi`）。
+- 说明：npm 的 `yi` 与 PyPI 的 `yi` 已被占用（0.1.0 / 0.0.7），本项目不发布到那两处；GitHub 同账号内 `yi` 可用。
+
+### 本次错误与改进（复盘闭环）
+- 发布时发现 8 个文件因 Python 在 Windows 写文本会转 CRLF，而 zip 经 `.gitattributes` 归一为 LF，导致 `SHA256SUMS` 与包内文件不一致、他人的完整性校验必失败 → 全仓统一 LF、重算校验和、重打资产，并用「下载包→解压→verify→install」全链路复验。
+- 空仓库首次发布时 Git Data API 返回 409（`Git Repository is empty`）→ 先用 Contents API 落一个文件起仓，再整树提交。
+- 教训：**发布物的字节一致性必须验到 sha256，不能只看"推成功"**；行尾是最隐蔽的差异源。
+
 ## v1.0.0 — 2026-11-11
 
 首个公开版本：4 个带引擎的技能 + 1 个路由技能。

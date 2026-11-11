@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""fortune-suite 自检：结构 / 编译 / 零依赖引擎自检 / 依赖可用时的冒烟。
+"""yi 自检：结构 / 编译 / 零依赖引擎自检 / 依赖可用时的冒烟。
 
 用法：python verify.py [-Root <bundle 根>] [--json]
 退出码：0 全绿（含跳过依赖的项）；1 有失败。
@@ -7,7 +7,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import py_compile
 import subprocess
 import sys
@@ -119,6 +121,25 @@ def main() -> int:
             except Exception as exc:  # noqa: BLE001
                 rows.append((d.name, f"json {jf.name}", "FAIL", str(exc)[:120]))
                 fails += 1
+
+    # 校验 SHA256SUMS（发布物字节一致性；缺失不算失败）
+    sumfile = root / "SHA256SUMS"
+    if sumfile.exists():
+        bad = []
+        for line in sumfile.read_text(encoding="utf-8").splitlines():
+            m = re.match(r"^([0-9a-f]{64})\s+\*?(.+)$", line.strip())
+            if not m:
+                continue
+            want, rel = m.group(1), m.group(2)
+            p = root / rel
+            if not p.exists():
+                bad.append(f"missing {rel}")
+                continue
+            got = hashlib.sha256(p.read_bytes()).hexdigest()
+            if got != want:
+                bad.append(f"sha mismatch {rel}")
+        rows.append(("(bundle)", "SHA256SUMS", "FAIL" if bad else "PASS", "; ".join(bad[:5])))
+        fails += 1 if bad else 0
 
     if args.json:
         print(json.dumps({"failures": fails,

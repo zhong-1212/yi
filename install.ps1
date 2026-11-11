@@ -1,4 +1,4 @@
-# fortune-suite installer  (PowerShell 5.1+ / PowerShell 7)
+# yi installer  (PowerShell 5.1+ / PowerShell 7)
 # ASCII-only on purpose: Windows PowerShell 5.1 mis-decodes UTF-8 without BOM.
 #
 #   .\install.ps1                 # junction skills into $env:DSH_HOME\skills (or ~\.dsh\skills)

@@ -1,4 +1,6 @@
-# fortune-suite · 术数五件套（4 个引擎 + 1 个路由）
+# 易（yi）· 术数五件套（4 个引擎 + 1 个路由）
+
+> 项目名「易」，仓库名 `yi`。
 
 一套可直接给 AI Agent 用的传统术数技能包。**算法由脚本确定性计算，解读由 LLM 完成**——排盘不靠模型"背"，结论不靠模型"编"。
 
@@ -15,6 +17,15 @@
 1. **能算的不许 LLM 手算**——每一盘都由脚本算出，脚本有 `--self-test`；
 2. **不给结论性预言**——只给"宜/不宜/阻力"与可做的事，不给日期、不给死生祸福；
 3. **诚实分层**——古本有的标"古断"，按取象推的标"推演"，不冒充古书。
+
+## 下载与解压
+
+```bash
+unzip yi-1.0.1.zip -d yi    # 注意：zip 内没有顶层目录，用 -d 指定解压到 yi/
+cd yi
+```
+
+PowerShell：`Expand-Archive yi-1.0.1.zip -DestinationPath yi; cd yi`
 
 ## 安装
 
@@ -111,7 +122,7 @@ pip install lunar-python x-iztro
 ## 目录结构
 
 ```
-fortune-suite/
+yi/
 ├── install.ps1 / install.sh   # 安装（软链 or 复制）
 ├── verify.py                  # 自检
 ├── SHA256SUMS                 # 完整性校验
@@ -128,6 +139,6 @@ fortune-suite/
 
 ## 版本与许可
 
-v1.0.0 · MIT（代码与文档）· 传统文本部分见 `NOTICE`。
+v1.0.1 · MIT（代码与文档）· 传统文本部分见 `NOTICE`。
 
 致谢：`lunar-python`、`x-iztro` 两个上游库；《周易》《梅花易数》《八宅明镜》一系传统文本为公有领域。
